@@ -34,6 +34,7 @@ public class ArtworkServiceImpl implements ArtworkService {
         return artworks.stream()
                 .map(artwork -> {
                     ArtworkDto artworkDto = modelMapper.map(artwork, ArtworkDto.class);
+                    artworkDto.setArtistId(artwork.getArtist().getId());
                     artworkDto.setArtistName(artwork.getArtist().getName());
                     return artworkDto;
                 }).toList();
@@ -63,6 +64,8 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public ApiResponse updateArtwork(Long id, ArtworkDto artworkDto) {
+
+        System.out.println(artworkDto.getId());
         Artwork artwork = artworkRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Artwork not found"));
 
@@ -71,6 +74,11 @@ public class ArtworkServiceImpl implements ArtworkService {
 
         modelMapper.map(artworkDto, artwork);
         artwork.setArtist(artist);
+
+        if (artworkDto.getArtistId() == null) {
+            throw new ResourceNotFoundException("Artist ID must not be null");
+        }
+
 
         artworkRepository.save(artwork);
 
