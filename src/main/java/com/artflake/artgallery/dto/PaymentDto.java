@@ -2,6 +2,7 @@ package com.artflake.artgallery.dto;
 
 import com.artflake.artgallery.model.PaymentMethod;
 import com.artflake.artgallery.model.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PaymentDto {
 
-    @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long orderId;
 
     @NotNull

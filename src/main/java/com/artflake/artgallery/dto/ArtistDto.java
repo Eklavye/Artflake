@@ -10,6 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ArtistDto {
 
+    @NotNull
+    private Long id;
+
     @Size(max = 50)
     @NotNull
     private String name;

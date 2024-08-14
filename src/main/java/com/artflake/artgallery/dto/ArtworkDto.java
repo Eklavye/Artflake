@@ -1,5 +1,7 @@
 package com.artflake.artgallery.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -12,6 +14,9 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class ArtworkDto {
+
+    @JsonProperty(access = Access.READ_ONLY)
+    private Long id;
 
     @NotNull
     @Size(max = 255)

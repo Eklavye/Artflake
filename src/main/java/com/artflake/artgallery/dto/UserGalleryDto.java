@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserGalleryDto {
+
     private Long userId;
     private Long galleryId;
 }
