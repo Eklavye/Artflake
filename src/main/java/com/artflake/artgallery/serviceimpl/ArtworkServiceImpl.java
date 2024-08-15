@@ -51,6 +51,21 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    public List<ArtworkDto> getArtworksByArtistId(Long artistId) {
+        Artist artist = artistRepository.findById(artistId)
+                .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+
+        List<Artwork> artworks = artworkRepository.findByArtist(artist);
+        return artworks.stream()
+                .map(artwork -> {
+                    ArtworkDto artworkDto = modelMapper.map(artwork, ArtworkDto.class);
+                    artworkDto.setArtistId(artist.getId());
+                    artworkDto.setArtistName(artist.getName());
+                    return artworkDto;
+                }).toList();
+    }
+
+    @Override
     public ApiResponse createArtwork(ArtworkDto artworkDto) {
         Artist artist = artistRepository.findById(artworkDto.getArtistId())
                 .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));

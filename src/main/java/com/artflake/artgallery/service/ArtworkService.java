@@ -10,6 +10,8 @@ public interface ArtworkService {
 
     ArtworkDto getArtworkById(Long id);
 
+    List<ArtworkDto> getArtworksByArtistId(Long artistId);
+
     ApiResponse createArtwork(ArtworkDto artworkDto);
 
     ApiResponse updateArtwork(Long id, ArtworkDto artworkDto);

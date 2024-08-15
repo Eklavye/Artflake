@@ -29,6 +29,12 @@ public class ArtworkController {
         return ResponseEntity.status(HttpStatus.OK).body(artwork);
     }
 
+    @GetMapping("/artist/{artistId}")
+    public ResponseEntity<List<ArtworkDto>> getArtworksByArtistId(@PathVariable("artistId") Long artistId) {
+        List<ArtworkDto> artworks = artworkService.getArtworksByArtistId(artistId);
+        return ResponseEntity.status(HttpStatus.OK).body(artworks);
+    }
+
     @PostMapping
     public ResponseEntity<ApiResponse> createArtwork(@RequestBody ArtworkDto artworkDto) {
         ApiResponse response = artworkService.createArtwork(artworkDto);
